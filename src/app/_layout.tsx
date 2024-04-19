@@ -6,6 +6,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import { StatusBar } from 'expo-status-bar';
+import { ColorSchemeName, Platform } from 'react-native';
+import { Screens } from '@/constants/Screens';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -45,14 +48,17 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+  const colorScheme:ColorSchemeName = useColorScheme();
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
+        <Stack.Screen name={Screens.WELCOME} options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        <Stack.Screen name={Screens.INSERT_PHONE_NUMBER} options={{ headerShown: false, }} />
+        <Stack.Screen name={Screens.VALIDATE_OTP_CODE} options={{ headerShown: false, }} />
       </Stack>
+
     </ThemeProvider>
   );
 }
