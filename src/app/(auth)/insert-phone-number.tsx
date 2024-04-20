@@ -1,57 +1,52 @@
 import { PhoneNumberInput, StatusBar, Text,  View } from "@/components/Themed";
 import Button from "@/components/buttons/Button";
-import LinkButton from "@/components/buttons/LinkButton";
 import ScreenContainer from "@/components/screen_container/ScreenContainer";
 import Colors from "@/constants/Colors";
-import { MutableRefObject, ReactElement, useEffect, useRef, useState } from "react";
-import { Alert, NativeSyntheticEvent,  TextInputChangeEventData } from "react-native";
+import {  ReactElement, useState } from "react";
+import { Alert,    } from "react-native";
 import { AppScreenNavigationProp } from "../../../types";
 import { useNavigation } from "expo-router";
 import { Screens } from "@/constants/Screens";
 import ModalLoading from "@/components/loadings/ModalLoading";
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { PhoneNumberValidation } from "@/types/PhoneNumberValidation";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Storages } from "@/constants/Storages";
 
+import { Env } from "@/constants/Env";
+import * as NetworkValidation from "@/utils/NetworkValidation";
 export default function InsertPhoneNumber():ReactElement {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [loadingVisible, setLoadingVisible] = useState<boolean>(false);
-    const navigation = useNavigation<AppScreenNavigationProp>();
-  function handlePhoneChange (phoneNumberInput: string): void {
-    console.log(phoneNumberInput.length);
-    console.log(phoneNumber.length);
+  const navigation = useNavigation<AppScreenNavigationProp>();
 
-    const numberSpace: string = "  ";
-    if (!phoneNumberInput.length) {
-      return;
-    }
-
-    if (phoneNumberInput.length === 0) {
-      setPhoneNumber("");
-      return;
-    }
-    if (phoneNumberInput.length > 13) {
-      return
-    }
-
-    if ((phoneNumberInput.length < phoneNumber.length) && (phoneNumberInput.length!==0)) {
-      phoneNumberInput = phoneNumberInput.substring(0, phoneNumberInput.length - 1);
-      setPhoneNumber(phoneNumberInput);
-      return;
-    }
-
-    if (phoneNumberInput.length === 1) {
-      setPhoneNumber(phoneNumberInput)
-    } else if (phoneNumberInput.length === 2) {
-      setPhoneNumber(phoneNumberInput + numberSpace);
-    } else if (phoneNumberInput.length >= 3 && phoneNumberInput.length <= 6) {
-      setPhoneNumber(phoneNumberInput);
-    } else if (phoneNumberInput.length === 7) {
-      setPhoneNumber(phoneNumberInput + numberSpace);
-    } else if (phoneNumberInput.length > 7) {
-      setPhoneNumber(phoneNumberInput);
-    }
+  async function validateIt (): Promise<void>{
+    await NetworkValidation.validateConnection(confirmPhoneNumber)
   }
+
+  // async function validateConnection (): Promise<void>{
+  //       const isNotConnected: boolean = await NetworkValidation.isNotConnectedToInternet();
+  //   if(isNotConnected){
+  //     Alert.alert("Falha na conexão!", "Houve falha tentando conectar ao servidores, verifique a sua internet.", [
+  //       {
+  //         isPreferred: true,
+  //         text: "Tentar novamente",
+  //         onPress() :void{
+  //           validateConnection();
+  //         },
+  //       },
+  //       {
+  //         text:"Cancelar"
+  //       }
+  //     ])
+  //     return;
+  //   } else {
+  //     confirmPhoneNumber()
+  //   }
+  // }
+
   async function confirmPhoneNumber (): Promise<void>{
+
     const validNumber: string = phoneNumber.replace("+", "").replace(" ", "").replace(" ", "").replace(" ", "").replace(" ", "");
 
     if (validNumber.length < 1) {
@@ -61,7 +56,7 @@ export default function InsertPhoneNumber():ReactElement {
     const isValid: boolean = await validatePhoneNumber(validNumber);
     setLoadingVisible(false);
     if (isValid) {
-      nextStepAlert(navigation, phoneNumber);
+     await  nextStepAlert(navigation, phoneNumber);
     } else {
       phoneNumberErrorAlert(phoneNumber);
     }
@@ -80,14 +75,14 @@ export default function InsertPhoneNumber():ReactElement {
         </View>
       </View>
         <View style={{flex:2}}>
-          <Button onPress={confirmPhoneNumber} text="Próximo"/>
+          <Button onPress={validateIt} text="Próximo"/>
         </View>
-      <ModalLoading visible={ loadingVisible} />
+      <ModalLoading visible={ loadingVisible} text="Conectando" />
       <StatusBar />
     </ScreenContainer>
   );
 }
-function nextStepAlert (navigation:any,phoneNumber:string) {
+async function  nextStepAlert (navigation:any,phoneNumber:string) :Promise<void>{
         Alert.alert("Confirmação!", `Você confirma que ${ phoneNumber } realmente é o seu número?`, [
       {
         text: "Editar",
@@ -96,7 +91,16 @@ function nextStepAlert (navigation:any,phoneNumber:string) {
       {
         text: "Ok",
         style:"destructive",
-        onPress: (): void => {
+        onPress: async (): Promise<void> => {
+          const url:string =`${Env.BACKEND_API}/user/first-step/send-phone-number`
+          try {
+            await axios.post(url, { phoneNumber: phoneNumber }).then(res => console.log(res.status));
+          } catch (error) {
+            console.log(error);
+            Alert.alert("Erro!", "Os servidores da Marksapp podem estar Desligados e/ou em manutenção, tente mais tarde.");
+            return;
+          }
+           AsyncStorage.setItem(Storages.VALIDATION_PHONE_NUMBER, phoneNumber);
           navigation.navigate(Screens.VALIDATE_OTP_CODE)
           //TODO send code to twilliooooooooooo
         }
@@ -112,10 +116,11 @@ function phoneNumberErrorAlert (phoneNumber: string): void{
     ])
 }
 async function validatePhoneNumber (phoneNumber: string): Promise<boolean>{
-  const phoneNumberValidationUrl:string =`https://phonevalidation.abstractapi.com/v1/?api_key=83aa9bb1af504576aa605295db6058f4&phone=${phoneNumber}`
-  return await axios.get(phoneNumberValidationUrl).then((res:AxiosResponse) :boolean=> {
+  const phoneNumberValidationUrl: string = Env.NUMBER_VALIDATION_API+ phoneNumber;
+  return await axios.get(phoneNumberValidationUrl,).then((res:AxiosResponse) :boolean=> {
     const data: PhoneNumberValidation = res.data;
     return data.valid;
   })
 
 }
+

@@ -57,6 +57,7 @@ function RootLayoutNav() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name={Screens.INSERT_PHONE_NUMBER} options={{ headerShown: false, }} />
         <Stack.Screen name={Screens.VALIDATE_OTP_CODE} options={{ headerShown: false, }} />
+        <Stack.Screen name={Screens.CREATE_USER_PROFILE} options={{ headerShown: false, }} />
       </Stack>
 
     </ThemeProvider>

@@ -5,8 +5,11 @@ export default {
         logoDarkStroke: require('@/assets/images/logo_dark_with_stroke.png'),
     },
     icons: {
-        infinityLoadingLight: require("@/assets/images/infinity_loading_blue.svg"),
-        infinityLoadingDark: require("@/assets/images/infinity_loading_white.svg"),
+        infinityLoadingLight: require("@/assets/images/icons/infinite_loading.json"),
+        infinityLoadingDark: require("@/assets/images/icons/infinite_loading_dark.json"),
     },
-    images: {},
+    images: {
+        uploadProfile: require("@/assets/images/icons/upload_profile_photo.png"),
+        uploadProfileDark: require("@/assets/images/icons/upload_profile_photo_dark.png"),
+    },
 }
