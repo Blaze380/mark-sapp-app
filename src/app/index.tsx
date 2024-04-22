@@ -8,9 +8,11 @@ import { useNavigation } from 'expo-router';
 import LinkButton from '@/components/buttons/LinkButton';
 import { Screens } from '@/constants/Screens';
 import { AppScreenNavigationProp } from '../../types';
+import { createUserDatabase } from '@/utils/DatabaseCreation';
+import { createAppDirectory } from '@/utils/FileDirectory';
 
 export default function WelcomeScreen (): ReactElement {
-  const navigation = useNavigation<AppScreenNavigationProp>();
+  const navigation: any = useNavigation<AppScreenNavigationProp>();
   //TODO change the navigation screen bellow to insert phone number
 
   return (

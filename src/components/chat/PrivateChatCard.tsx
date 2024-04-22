@@ -15,6 +15,7 @@ export type PrivateChatProps = {
     messageStatus?: MessageStatus;
     messageType?: MessageTypes;
     numberOfIncomingMsgs?: number;
+    onPressEvent?: any;
 
 }
 
@@ -23,7 +24,7 @@ export default function PrivateChatCard (props: PrivateChatProps): ReactElement 
     let messageTypeIcon: any;
     let messageStatusColor: string = 'white';
     const { userName, profilePhoto, dateSent, messageStatus, isCurrentUserThatSentThisMessage,
-        message, messageType, numberOfIncomingMsgs } = props;
+        message, messageType, numberOfIncomingMsgs, onPressEvent } = props;
 
     if (messageStatus && isCurrentUserThatSentThisMessage) {
         if (messageStatus === MessageStatus.READ) {
@@ -40,7 +41,7 @@ export default function PrivateChatCard (props: PrivateChatProps): ReactElement 
     }
 
     return (
-        <TouchableOpacity className="flex flex-row items-center w-full mt-2 mb-2 ml-4">
+        <TouchableOpacity onPress={(): void => onPressEvent} className="flex flex-row items-center w-full mt-2 mb-2 ml-4">
             <View className="border-2 border-white rounded-full w-16 h-16 overflow-hidden">
                 <Image className={`w-full h-full rounded-full ${ profilePhoto ? '' : 'bg-white' }`} source={profilePhoto ? profilePhoto : Images.images.userPlaceholder} style={{ resizeMode: "contain" }}></Image>
             </View>

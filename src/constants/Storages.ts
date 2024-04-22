@@ -8,3 +8,7 @@ export enum Storages {
 export enum Databases {
     USER = "configuration"
 }
+export enum DBNames {
+    USER = 'user',
+    USER_PERMISSIONS = 'user_permissions'
+}

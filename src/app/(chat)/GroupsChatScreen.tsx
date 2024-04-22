@@ -8,7 +8,7 @@ import { ReactElement } from "react";
 import { Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function MainChatScreen (): ReactElement {
+export default function GroupsChatScreen (): ReactElement {
     return (
         <GestureScreenContainer>
             <ScrollView className="w-full h-full mt-4" >

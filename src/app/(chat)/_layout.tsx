@@ -31,7 +31,7 @@ export default function TabLayout (): ReactElement {
                 tabBarLabelStyle: { fontSize: 16 }, tabBarInactiveTintColor: colorScheme === "dark" ? 'grey' : "black"
             }}>
                 <Tabs.Screen
-                    name="MainChatScreen"
+                    name={Screens.PRIVATE_CHAT_SCREEN}
                     options={{
                         title: "Mensagens",
                         tabBarIcon: ({ color, focused }) => focused ? <MaterialCommunityIcons name="message-text" size={35} color={color} /> : <MaterialCommunityIcons name="message-text-outline" size={35} color={color} />,
@@ -40,11 +40,12 @@ export default function TabLayout (): ReactElement {
                     }}
                 />
                 <Tabs.Screen
-                    name="Status"
+                    name={Screens.GROUP_CHAT_SCREEN}
                     options={{
-                        title: 'Status',
-                        tabBarIcon: ({ color, focused }) => focused ? <MaterialCommunityIcons name="star-circle" size={35} color={color} /> : <MaterialCommunityIcons name="star-circle-outline" size={35} color={color} />,
+                        title: "Grupos",
+                        tabBarIcon: ({ color, focused }) => focused ? <MaterialCommunityIcons name="group" size={35} color={color} /> : <MaterialCommunityIcons name="message-text-outline" size={35} color={color} />,
                         headerShown: false,
+
                     }}
                 />
                 <Tabs.Screen
@@ -61,7 +62,15 @@ export default function TabLayout (): ReactElement {
                     }}
                 />
                 <Tabs.Screen
-                    name="Calls"
+                    name={Screens.STATUS}
+                    options={{
+                        title: 'Status',
+                        tabBarIcon: ({ color, focused }) => focused ? <MaterialCommunityIcons name="star-circle" size={35} color={color} /> : <MaterialCommunityIcons name="star-circle-outline" size={35} color={color} />,
+                        headerShown: false,
+                    }}
+                />
+                <Tabs.Screen
+                    name={Screens.CALLS}
                     options={{
                         title: 'Chamadas',
                         tabBarIcon: ({ color, focused }) => focused ? <MaterialCommunityIcons name="phone" size={35} color={color} /> : <MaterialCommunityIcons name="phone-outline" size={35} color={color} />,
