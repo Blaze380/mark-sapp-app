@@ -1,0 +1,6 @@
+<GestureHandlerRootView>
+                <View style={{ flex: 1, backgroundColor: "white" }}>
+                    <Text className="text-white">akdjkajdkjdkj</Text>
+                </View>
+
+            </GestureHandlerRootView>

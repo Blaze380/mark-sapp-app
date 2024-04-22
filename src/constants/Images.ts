@@ -11,5 +11,7 @@ export default {
     images: {
         uploadProfile: require("@/assets/images/icons/upload_profile_photo.png"),
         uploadProfileDark: require("@/assets/images/icons/upload_profile_photo_dark.png"),
+        userPlaceholder: require("@/assets/images/user_placeholder.png"),
+        groupPlaceholder: require("@/assets/images/group_placeholder.png"),
     },
 }

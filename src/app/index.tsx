@@ -1,5 +1,5 @@
 
-import  {ImageLogo, StatusBar, Text, View } from '@/components/Themed';
+import { ImageLogo, StatusBar, Text, View } from '@/components/Themed';
 import { ReactElement, useEffect } from 'react';
 import ScreenContainer from '@/components/screen_container/ScreenContainer';
 import Styles from '@/constants/Styles';
@@ -9,22 +9,22 @@ import LinkButton from '@/components/buttons/LinkButton';
 import { Screens } from '@/constants/Screens';
 import { AppScreenNavigationProp } from '../../types';
 
-export default function WelcomeScreen():ReactElement {
+export default function WelcomeScreen (): ReactElement {
   const navigation = useNavigation<AppScreenNavigationProp>();
   //TODO change the navigation screen bellow to insert phone number
 
   return (
     <ScreenContainer>
-      <View style={{flex:5,alignItems:"center",justifyContent:"center"}}>
-        <ImageLogo style={ {width:500,height:500,resizeMode:"contain"}} />
+      <View style={{ flex: 5, alignItems: "center", justifyContent: "center" }}>
+        <ImageLogo style={{ width: 500, height: 500, resizeMode: "contain" }} />
         <Text style={Styles.title}>O MarkSapp dá-lhe as Boas vindas</Text>
-        <View style={{alignItems:"center",justifyContent:"center"}}>
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
           <Text style={{ textAlign: "center" }} >Deseja simplificar suas comunicações diárias? Experimente o MarkSapp, a solução perfeita para conectar-se instantaneamente com amigos, familiares e colegas.</Text>
         </View>
       </View>
-        <View style={{flex:1}}>
-          <LinkButton href={Screens.CREATE_USER_PROFILE} text="continuar"/>
-        </View>
+      <View style={{ flex: 1 }}>
+        <LinkButton href='(chat)' text="continuar" />
+      </View>
 
 
       <StatusBar />

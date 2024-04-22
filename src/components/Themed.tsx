@@ -27,6 +27,8 @@ import { StatusBar as DefaultStatusBar } from 'expo-status-bar';
 import Images from '@/constants/Images';
 import { TextInputMask as DefaultTextInputMask } from 'react-native-masked-text';
 import LottieView from 'lottie-react-native';
+import { GestureHandlerRootView as DefaultGestureHandlerRootView } from 'react-native-gesture-handler';
+import { GestureHandlerRootViewProps } from 'react-native-gesture-handler/lib/typescript/components/GestureHandlerRootView';
 
 export type ThemeProps = {
   lightColor?: string;
@@ -180,5 +182,14 @@ export function InfiniteLoading (props: LoadingProps): ReactElement {
   }, [colorScheme]);
   return (
     <LottieView style={style} source={customImage} autoPlay loop={true} />
+  )
+}
+
+export type GestureHandlerViewProps = ThemeProps & GestureHandlerRootViewProps;
+export function GestureHandlerRootView (props: GestureHandlerViewProps): ReactElement {
+  const { style, lightColor, darkColor, ...otherProps } = props;
+  const background: string = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
+  return (
+    <DefaultGestureHandlerRootView style={[style, { backgroundColor: background }]} {...otherProps} />
   )
 }
