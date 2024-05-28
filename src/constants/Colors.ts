@@ -4,10 +4,12 @@ const tintColorDark = '#0F87BF';
 export default {
   light: {
     text: '#000',
+    placeholder: "#ccc",
     background: '#ffff',
     tint: tintColorLight,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorLight,
+    bottomSheetBackground: "white",
+    tabIconDefault: '#0000',
+    tabIconSelected: tintColorDark,
     statusBarColor: "#ffff",
     buttonBackground: "#0F87BF",
     buttonText: "#000",
@@ -15,9 +17,11 @@ export default {
   },
   dark: {
     text: '#ffff',
-    background: '#0A5375',
+    placeholder: "#0A5375",
+    background: '#0c0c0cf8',
+    bottomSheetBackground: "black",
     tint: tintColorDark,
-    tabIconDefault: '#ccc',
+    tabIconDefault: tintColorLight,
     tabIconSelected: tintColorDark,
     statusBarColor: "#0A5375",
     buttonBackground: tintColorDark,
@@ -25,3 +29,6 @@ export default {
     color: "#ffff",
   },
 };
+
+
+//#0A5375
