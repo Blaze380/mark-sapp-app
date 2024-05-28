@@ -12,7 +12,7 @@ export async function isNotConnectedToInternet (): Promise<boolean> {
     }
 }
 
-export async function validateConnection (ifConnectionFunction: () => void | null): Promise<void> {
+export async function validateConnection (ifConnectionFunction: () => void | Promise<void> | null | Promise<null>): Promise<void> {
     const isNotConnected: boolean = await isNotConnectedToInternet();
     if (isNotConnected) {
         Alert.alert("Falha na conexão!", "Houve falha tentando conectar ao servidores, verifique a sua internet.", [

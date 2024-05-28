@@ -8,8 +8,6 @@ import { useNavigation } from 'expo-router';
 import LinkButton from '@/components/buttons/LinkButton';
 import { Screens } from '@/constants/Screens';
 import { AppScreenNavigationProp } from '../../types';
-import { createUserDatabase } from '@/utils/DatabaseCreation';
-import { createAppDirectory } from '@/utils/FileDirectory';
 
 export default function WelcomeScreen (): ReactElement {
   const navigation: any = useNavigation<AppScreenNavigationProp>();
@@ -17,17 +15,16 @@ export default function WelcomeScreen (): ReactElement {
 
   return (
     <ScreenContainer>
-      <View style={{ flex: 5, alignItems: "center", justifyContent: "center" }}>
-        <ImageLogo style={{ width: 500, height: 500, resizeMode: "contain" }} />
-        <Text style={Styles.title}>O MarkSapp dá-lhe as Boas vindas</Text>
-        <View style={{ alignItems: "center", justifyContent: "center" }}>
-          <Text style={{ textAlign: "center" }} >Deseja simplificar suas comunicações diárias? Experimente o MarkSapp, a solução perfeita para conectar-se instantaneamente com amigos, familiares e colegas.</Text>
+      <View className='flex-[4] items-center justify-center' >
+        <ImageLogo className='w-[400] h-[400] resize-[contain] ' />
+        <Text className='text-[20px] font-bold'>O MarkSapp dá-lhe as Boas vindas</Text>
+        <View className='items-center justify-center'>
+          <Text className='text-center' >Deseja simplificar suas comunicações diárias? Experimente o MarkSapp, a solução perfeita para conectar-se instantaneamente com amigos, familiares e colegas.</Text>
         </View>
       </View>
-      <View style={{ flex: 1 }}>
-        <LinkButton href='(chat)' text="continuar" />
+      <View className='flex-[1]'>
+        <LinkButton href={`(chat)`} text="continuar" />
       </View>
-
 
       <StatusBar />
     </ScreenContainer>

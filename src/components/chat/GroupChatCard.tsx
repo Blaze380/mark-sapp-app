@@ -6,11 +6,12 @@ import { MessageTypes } from "@/constants/MessageTypes.enum";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MessageStatus } from "@/constants/MessageStatus.enum";
 
-export type PrivateChatProps = {
-    userName: string;
+export type GroupChatProps = {
+    groupName: string;
     profilePhoto?: NodeRequire;
     message: string;
     dateSent: string;
+    userNameThatSentMessage?: string;
     isCurrentUserThatSentThisMessage: boolean;
     messageStatus?: MessageStatus;
     messageType?: MessageTypes;
@@ -19,12 +20,12 @@ export type PrivateChatProps = {
 
 }
 
-export default function PrivateChatCard (props: PrivateChatProps): ReactElement {
+export default function GroupChatCard (props: GroupChatProps): ReactElement {
     let messageStatusIcon: any;
     let messageTypeIcon: any;
     let messageStatusColor: string = 'white';
-    const { userName, profilePhoto, dateSent, messageStatus, isCurrentUserThatSentThisMessage,
-        message, messageType, numberOfIncomingMsgs, onPressEvent } = props;
+    const { groupName, profilePhoto, dateSent, messageStatus, isCurrentUserThatSentThisMessage,
+        message, messageType, numberOfIncomingMsgs, onPressEvent, userNameThatSentMessage } = props;
 
     if (messageStatus && isCurrentUserThatSentThisMessage) {
         if (messageStatus === MessageStatus.READ) {
@@ -41,24 +42,27 @@ export default function PrivateChatCard (props: PrivateChatProps): ReactElement 
     }
 
     return (
-        <TouchableOpacity className="flex flex-row items-center w-full mt-2 mb-2 ml-4">
+        <TouchableOpacity onPress={(): void => onPressEvent} className="flex flex-row items-center w-full mt-2 mb-2 ml-4">
             <View className="border-2 border-white rounded-full w-14 h-14 overflow-hidden">
-                <Image className={`w-full h-full rounded-full ${ profilePhoto ? '' : 'bg-white' }`} source={profilePhoto ? profilePhoto : Images.images.userPlaceholder} style={{ resizeMode: "contain" }}></Image>
+                <Image className={`w-full h-full rounded-full ${ profilePhoto ? '' : 'bg-white' }`} source={profilePhoto ? profilePhoto : Images.images.groupPlaceholder} style={{ resizeMode: "contain" }}></Image>
             </View>
             <View className="ml-4 w-56">
                 <View className="flex flex-row  items-center justify-between">
-                    <Text className="text-text font-bold" ellipsizeMode="tail" numberOfLines={1}>{userName}</Text>
-                    <Text className="text-text text-white">{dateSent}</Text>
+                    <Text className="text-text font-bold" ellipsizeMode="tail" numberOfLines={1}>{groupName}</Text>
+                    <Text className="text-text ">{dateSent}</Text>
                 </View>
                 <View className="flex flex-row items-center" >
                     {isCurrentUserThatSentThisMessage && <MaterialCommunityIcons name={messageStatusIcon} size={20} color={messageStatusColor} />}
-                    {messageType && <MaterialCommunityIcons name={messageTypeIcon} size={20} color={'white'} />}
+                    <Text>{isCurrentUserThatSentThisMessage ? `${ userNameThatSentMessage ? userNameThatSentMessage : "You" }:` : 'You:'}</Text>
 
                     <View className="ml-2 flex flex-row items-center justify-between w-56">
-                        <Text ellipsizeMode="tail" numberOfLines={1}>{message}</Text>
+                        <View className="flex flex-row items-center space-x-1">
+                            {messageType && <MaterialCommunityIcons name={messageTypeIcon} size={20} color={'white'} />}
+                            <Text ellipsizeMode="tail" numberOfLines={1}>{message}</Text>
+                        </View>
                         {numberOfIncomingMsgs &&
-                            (<View className="w-6 h-6 mr-5 relative right-0 items-center justify-center flex rounded-full bg-iblue">
-                                <Text className="text-white text-[9]">{numberOfIncomingMsgs}</Text>
+                            (<View className="w-6 h-6 mr-5 relative right-0 flex items-center justify-center rounded-full bg-iblue">
+                                <Text className="text-white " style={{ fontSize: 9 }}>{numberOfIncomingMsgs}</Text>
                             </View>
                             )}
                     </View>

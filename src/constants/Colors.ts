@@ -18,7 +18,7 @@ export default {
   dark: {
     text: '#ffff',
     placeholder: "#0A5375",
-    background: '#0A5375',
+    background: '#0c0c0cf8',
     bottomSheetBackground: "black",
     tint: tintColorDark,
     tabIconDefault: tintColorLight,
@@ -29,3 +29,6 @@ export default {
     color: "#ffff",
   },
 };
+
+
+//#0A5375

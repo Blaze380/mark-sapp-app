@@ -1,8 +1,9 @@
 export enum Storages {
     VALIDATION_PHONE_NUMBER = "validation_phone_number",
     USERNAME = 'username',
-    TEMP_USER_ID = 'temp_user_id',
-    AUTH_TOKEN = 'throw_auth_token'
+    USER_ID = 'user_id',
+    AUTH_TOKEN = 'throw_auth_token',
+    IS_LOGGED = 'is_logged',
 }
 
 export enum Databases {

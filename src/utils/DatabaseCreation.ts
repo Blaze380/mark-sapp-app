@@ -2,7 +2,7 @@ import { DBNames, Databases } from '@/constants/Storages';
 import { ResultSet, SQLTransactionAsync, openDatabase } from 'expo-sqlite';
 import { SQLiteDatabase } from 'expo-sqlite/build/SQLite';
 
-
+//DEPRECATED por causa de sofrimento e muito AVC
 export async function createUserDatabase (): Promise<void> {
     const db: SQLiteDatabase = openDatabase(Databases.USER,);
     db.transactionAsync(async (tx: SQLTransactionAsync): Promise<void> => {

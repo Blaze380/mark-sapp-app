@@ -5,9 +5,11 @@ export enum Screens {
     CREATE_USER_PROFILE = "(settings)/(user)/CreateProfile",
     SETTINGS = "(settings)/Settings",
     PRIVATE_CHAT_SCREEN = 'PrivateChatScreen',
-    GROUP_CHAT_SCREEN = 'GroupChatScreen',
+    GROUPS_CHAT_SCREEN = 'GroupsChatScreen',
     PRIVATE_CHAT = 'PrivateChat',
     GROUP_CHAT = 'GroupChat',
-
+    STATUS = 'Status',
+    CALLS = 'Calls',
     USER_PROFILE = 'UserProfile',
+    CHAT = '(chat)',
 }

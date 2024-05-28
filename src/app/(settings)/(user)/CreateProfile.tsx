@@ -19,14 +19,17 @@ import { Storages } from "@/constants/Storages";
 import { useNavigation } from "expo-router";
 import { AppScreenNavigationProp } from "../../../../types";
 import { Screens } from "@/constants/Screens";
+import { getUserAuthToken, getUserId, getUserPhoneNumber, saveUserAuthToken, saveUserID } from "@/utils/DataSaving";
 
 type ImageUploadProps = {
     uri: string;
     type: string;
     name: string;
+    fileName: string;
 }
 
 export default function CreateProfile (): ReactElement {
+    const navigation = useNavigation<AppScreenNavigationProp>()
     const imageChoosingRef = useRef<BottomSheet>(null)
     const colorScheme: ColorSchemeName = useColorScheme();
     const [profilePhoto, setUserProfilePhoto] = useState<ImageUploadProps>({} as ImageUploadProps);
@@ -58,7 +61,12 @@ export default function CreateProfile (): ReactElement {
         });
         if (!result.canceled) {
             setLoadingImage(true);
-            profilePhoto.uri = result.assets[0].uri;
+            console.log(result.assets[0])
+            profilePhoto.uri = result.assets[0].uri as string;
+            profilePhoto.name = result.assets[0].fileName as string;
+            profilePhoto.fileName = result.assets[0].fileName as string;
+            profilePhoto.type = result.assets[0].type as string;
+            console.log(profilePhoto)
             setUserProfilePhoto(profilePhoto);
             setLoadingImage(false);
         }
@@ -76,6 +84,7 @@ export default function CreateProfile (): ReactElement {
             setLoadingImage(true);
             profilePhoto.uri = result.assets[0].uri as string;
             profilePhoto.name = result.assets[0].fileName as string;
+            profilePhoto.fileName = result.assets[0].fileName as string;
             profilePhoto.type = result.assets[0].type as string;
             setUserProfilePhoto(profilePhoto);
             setLoadingImage(false);
@@ -89,61 +98,64 @@ export default function CreateProfile (): ReactElement {
             return;
         }
         setCreateUser(true);
-        createUserProfile(userName, profilePhoto);
+
+    }
+    if (createUser) {
+        createUserProfile(userName, profilePhoto, navigation);
     }
 
     return (
         <GestureHandlerRootView >
             <View className="w-full h-full justify-center items-center flex">
-                <View className="flex justify-center items-center mb-16" style={{ flex: 2 }}>
-                    <View className="flex justify-center items-center space-y-20 mb-10">
-                        <Text lightColor={Colors.light.text} darkColor={Colors.dark.text} style={Styles.title}>Informação do perfil</Text>
-                        <Text lightColor={Colors.light.text} darkColor={Colors.dark.text} style={Styles.text}>Por favor forneça o seu nome e um foto de perfil opcional</Text>
+                <View className="flex justify-center items-center mb-16" style={{ flex: 4 }}>
+                    <View className="flex justify-center items-center space-y-20 mb-4">
+                        <Text lightColor={Colors.light.text} darkColor={Colors.dark.text} className="text-title font-bold">Informação do perfil</Text>
+                        <Text lightColor={Colors.light.text} darkColor={Colors.dark.text} className="text-text">Por favor forneça o seu nome e um foto de perfil opcional</Text>
                     </View>
                     <TouchableOpacity onPress={(): void => { imageChoosingRef.current?.expand() }} disabled={loadingImage ? true : false}>
-                        <View className={` rounded-full w-40  h-40 flex justify-center items-center`} style={{ backgroundColor: "#0F87BF" }}>
-                            {loadingImage ? (<InfiniteLoading style={{ width: 150, height: 150 }} darkImage={Images.icons.infinityLoadingDark} lightImage={Images.icons.infinityLoadingDark}></InfiniteLoading>) : <Image className={`w-${ profilePhoto ? "full" : '20' } ${ profilePhoto ? 'rounded-full' : '' } h-${ profilePhoto ? "full" : '20' }`} source={profilePhoto ? { uri: profilePhoto.uri } : placeholderImg} />}
+                        <View className={` rounded-full w-28  h-28 flex justify-center items-center bg-iblue`}>
+                            {loadingImage ? (<InfiniteLoading style={{ width: 100, height: 100 }} darkImage={Images.icons.infinityLoadingDark} lightImage={Images.icons.infinityLoadingDark}></InfiniteLoading>) : <Image className={`w-${ profilePhoto ? "full" : '20' } ${ profilePhoto && 'rounded-full' } h-${ profilePhoto ? "full" : '20' }`} source={profilePhoto ? { uri: profilePhoto.uri } : placeholderImg} />}
                         </View>
                     </TouchableOpacity>
                     <View className="flex flex-row space-x-3 justify-center items-center mt-16 ">
-                        <BottomTextInput className="w-96  text-lg" placeholder="Digite o seu nome aqui" value={userName} onChangeText={(text: string): void => setUserName(text)} />
-                        <MaterialIcons name="insert-emoticon" size={40} color={insertEmoji} onPress={(): void => Alert.alert("Informação", "Essa feature estará disponível nas próximas atualizações")} />
+                        <BottomTextInput className="w-56  text-text" placeholder="Digite o seu nome aqui" value={userName} onChangeText={(text: string): void => setUserName(text)} />
+                        <MaterialIcons name="insert-emoticon" size={30} color={insertEmoji} onPress={(): void => Alert.alert("Informação", "Essa feature estará disponível nas próximas atualizações")} />
                     </View>
                 </View>
-                <View style={{ flex: 1 }}>
+                <View className="flex-1">
                     <Button onPress={(): void => { createNewUser() }} text="Próximo" />
                 </View>
             </View>
 
             {/* CREATING USER MODAL */}
             <Modal visible={createUser} className="flex justify-center items-center" lightColor={Colors.light.background} darkColor={Colors.dark.background}>
-                <View className="flex justify-center items-center" style={{ flex: 1 }}>
-                    <Text className="mb-10" style={Styles.title} lightColor={Colors.light.text} darkColor={Colors.dark.text}>Aguarde por favor...</Text>
-                    <ImageLogo style={{ width: 500, height: 500, resizeMode: "contain" }} />
-                    <InfiniteLoading style={{ width: 200, height: 200 }} darkImage={Images.icons.infinityLoadingDark} lightImage={Images.icons.infinityLoadingLight}></InfiniteLoading>
+                <View className="flex-1 justify-center items-center">
+                    <Text className="mb-10 text-title font-bold" lightColor={Colors.light.text} darkColor={Colors.dark.text}>Aguarde por favor...</Text>
+                    <ImageLogo className="w-[300] h-[300] resize-[contain]" />
+                    <InfiniteLoading style={{ width: 140, height: 140 }} darkImage={Images.icons.infinityLoadingDark} lightImage={Images.icons.infinityLoadingLight}></InfiniteLoading>
                 </View>
             </Modal>
 
             {/* IMAGE CHOOSING OPTIONS */}
             <BottomSheet index={0} snapPoints={['40%']} enableHandlePanningGesture enableOverDrag enablePanDownToClose ref={imageChoosingRef} >
                 <View className="flex flex-col w-full h-full items-center justify-center ">
-                    <Text className=" mt-10" style={Styles.title} lightColor={Colors.light.text} darkColor={Colors.dark.text}>Selecione uma Imagem</Text>
+                    <Text className=" text-title font-bold" lightColor={Colors.light.text} darkColor={Colors.dark.text}>Selecione uma Imagem</Text>
 
-                    <View className="flex flex-row w-full h-56 items-center justify-around">
+                    <View className="flex flex-row w-full h-36 items-center justify-around">
                         {/* Camera */}
                         <TouchableOpacity className="flex flex-col items-center justify-center" onPress={pickImageFromCamera}>
-                            <MaterialCommunityIcons name="camera-plus" size={60} color={insertEmoji} />
-                            <Text style={Styles.text} lightColor={Colors.light.text} darkColor={Colors.dark.text}>Camera</Text>
+                            <MaterialCommunityIcons name="camera-plus" size={40} color={insertEmoji} />
+                            <Text className="text-text" lightColor={Colors.light.text} darkColor={Colors.dark.text}>Camera</Text>
                         </TouchableOpacity>
 
                         {/* Lib */}
                         <TouchableOpacity className="flex flex-col items-center justify-center" onPress={pickImageFromLibrary}>
-                            <MaterialCommunityIcons name="file-image-plus" size={60} color={insertEmoji} />
-                            <Text style={Styles.text} lightColor={Colors.light.text} darkColor={Colors.dark.text}>Galeria</Text>
+                            <MaterialCommunityIcons name="file-image-plus" size={40} color={insertEmoji} />
+                            <Text className="text-text" lightColor={Colors.light.text} darkColor={Colors.dark.text}>Galeria</Text>
                         </TouchableOpacity>
 
                     </View>
-                    <View className="-mt-10">
+                    <View className="">
                         <Button onPress={(): void => { imageChoosingRef.current?.close() }} text="Fechar" />
                     </View>
                 </View>
@@ -155,35 +167,40 @@ export default function CreateProfile (): ReactElement {
 }
 
 
-async function createUserProfile (userName: string, profilePhoto: ImageUploadProps): Promise<void> {
-    const userId: string = await AsyncStorage.getItem(Storages.TEMP_USER_ID) as string;
-    const userPhoneNumber: string = await AsyncStorage.getItem(Storages.VALIDATION_PHONE_NUMBER) as string;
+async function createUserProfile (userName: string, profilePhoto: ImageUploadProps, navigation: any): Promise<void> {
+    const userPhoneNumber: string = (await getUserPhoneNumber()).replaceAll(" ", "");
+    await sendUserData(userName, userPhoneNumber);
+    if (profilePhoto) {
+        const userId: string = await getUserId();
+        const authToken: string = await getUserAuthToken();
+        sendProfilePhoto(userId, profilePhoto, authToken);
+    }
 
-    sendUserData(userId, userName, userPhoneNumber)
-    sendProfilePhoto(userId, profilePhoto);
 
-    const navigation = useNavigation<AppScreenNavigationProp>()
-    navigation.navigate(Screens.HOME_CHAT);
+    navigation.navigate(Screens.PRIVATE_CHAT_SCREEN);
 }
-async function sendProfilePhoto (userId: string, profilePhoto: any): Promise<void> {
+async function sendProfilePhoto (userId: string, profilePhoto: any, authToken: string): Promise<void> {
     const form: FormData = new FormData();
-    form.append("profilePhoto", profilePhoto);
-    const url: string = Env.BACKEND_API + `/upload-profile-photo/?id=${ userId }`;
-    const res: AxiosResponse = await axios.postForm(url, form);
+    form.append("profilePhoto", JSON.stringify(profilePhoto));
+    console.log(profilePhoto)
+    const url: string = Env.BACKEND_API + `/user/upload-profile-photo?id=${ userId }`;
+    const res: AxiosResponse = await axios.postForm(url, form, { headers: { Authorization: `Bearer ${ authToken }` } });
     if (res.status !== HttpStatusCode.Ok) {
-        throw new Error("Algo deu errado!");
+        throw new Error("Algo deu errado!2");
     }
 
 }
-async function sendUserData (userId: string, userName: string, userPhoneNumber: string): Promise<void> {
-    const url: string = Env.BACKEND_API + "/user/update-user";
+async function sendUserData (userName: string, userPhoneNumber: string): Promise<void> {
+    const url: string = Env.BACKEND_API + "/user/save-user";
     const data = {
-        id: userId,
         userName: userName,
         phoneNumber: userPhoneNumber,
     }
-    const res: AxiosResponse = await axios.post(url, data);
-    if (res.status !== HttpStatusCode.Ok) {
+    const res: AxiosResponse = await axios.post(url, data)
+    saveUserID(res.data.userId);
+    saveUserAuthToken(res.data.accessToken);
+    if (res.status !== HttpStatusCode.Created) {
+        console.log(res.data + ' somethin')
         throw new Error("Algo deu errado!");
     }
 }
