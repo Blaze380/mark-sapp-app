@@ -1,17 +1,19 @@
 
 import { ImageLogo, StatusBar, Text, View } from '@/components/Themed';
-import { ReactElement, useEffect } from 'react';
-import ScreenContainer from '@/components/screen_container/ScreenContainer';
-import Styles from '@/constants/Styles';
+import { ReactElement } from 'react';
+import ScreenContainer from '@/components/screen_container/ScreenContainer'
 
-import { useNavigation } from 'expo-router';
+import { Href, Link, LinkProps, router, useNavigation } from 'expo-router';
 import LinkButton from '@/components/buttons/LinkButton';
 import { Screens } from '@/constants/Screens';
 import { AppScreenNavigationProp } from '../../types';
+import { testDatabase } from '@/utils/test';
 
 export default function WelcomeScreen (): ReactElement {
   const navigation: any = useNavigation<AppScreenNavigationProp>();
   //TODO change the navigation screen bellow to insert phone number
+  //testDatabase();
+
 
   return (
     <ScreenContainer>
@@ -23,7 +25,7 @@ export default function WelcomeScreen (): ReactElement {
         </View>
       </View>
       <View className='flex-[1]'>
-        <LinkButton href={`(chat)`} text="continuar" />
+        <LinkButton href={`/main_tab/private_chats_tab/PrivateChatScreen`} text="continuar" />
       </View>
 
       <StatusBar />

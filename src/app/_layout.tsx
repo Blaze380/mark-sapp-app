@@ -50,19 +50,16 @@ export default function RootLayout (): ReactElement | null {
 
 function RootLayoutNav (): ReactElement {
   const colorScheme: ColorSchemeName = useColorScheme();
-
+  //const { session, isLoading } = useSession();
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name={Screens.WELCOME} options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name={Screens.INSERT_PHONE_NUMBER} options={{ headerShown: false, }} />
-        <Stack.Screen name={Screens.VALIDATE_OTP_CODE} options={{ headerShown: false, }} />
-        <Stack.Screen name={Screens.CREATE_USER_PROFILE} options={{ headerShown: false, }} />
-        <Stack.Screen name={Screens.SETTINGS} options={{ headerShown: true, }} />
-        <Stack.Screen name={'(chat)'} options={{
+        <Stack.Screen name={Screens.WELCOME.INDEX as string} options={{ headerShown: false, }} />
+        <Stack.Screen name={Screens.AUTH.INSERT_PHONE_NUMBER as string} options={{ headerShown: false, }} />
+        <Stack.Screen name={Screens.WELCOME.MAIN_TAB.INDEX as string} options={{
           headerShown: true, headerTitle: "MarksApp", headerBackVisible: false, headerTitleStyle: { fontSize: 30 }
         }} />
+
       </Stack>
 
     </ThemeProvider>

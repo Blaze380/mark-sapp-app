@@ -11,7 +11,7 @@ interface QuickConfigurationButtonProps {
 export default function QuickConfigurationButton (props: QuickConfigurationButtonProps): ReactElement {
     const colorScheme: ColorSchemeName = useColorScheme();
     return (
-        <TouchableOpacity className=' ml-5 mt-3 flex items-center justify-start flex-row space-x-2 bg-transparent'>
+        <TouchableOpacity className=' ml-5 mt-1 flex items-center justify-start flex-row space-x-2 bg-transparent'>
             {props.iconName == "gear" ? <Octicons name="gear" size={30} color={Colors[colorScheme ?? 'light'].color} /> : <MaterialCommunityIcons name={props.iconName} size={30} color={Colors[colorScheme ?? 'light'].color} />}
             <Text className='text-text font-semibold'>{props.text}</Text>
         </TouchableOpacity>

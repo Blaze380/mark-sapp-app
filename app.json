@@ -37,12 +37,7 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "O MarksApp pede acesso a galeria para compartilhar fotos na App.",
-        }
-      ]
+      "expo-image-picker"
     ],
     "experiments": {
       "typedRoutes": true
