@@ -11,8 +11,8 @@ module.exports = {
         iblue: "#0F87BF",
       },
       fontSize: {
-        text: "16",
-        title: "18"
+        text: "16px",
+        title: "18px"
       }
     },
   },

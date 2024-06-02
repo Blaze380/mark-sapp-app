@@ -4,7 +4,7 @@ import Colors from "@/constants/Colors";
 import Styles from "@/constants/Styles";
 
 interface Props {
-    onPress: any;
+    onPress: () => void | Promise<void> | any | Promise<any>;
     text: ReactNode;
 }
 

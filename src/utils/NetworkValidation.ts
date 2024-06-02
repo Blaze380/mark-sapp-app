@@ -33,7 +33,7 @@ export async function validateConnection (ifConnectionFunction: () => void | Pro
     }
 }
 
-export function errorConnectionMessage (ifConnectionFunction: () => void | null): void {
+export function errorConnectionMessage (ifConnectionFunction: () => void | null | Promise<void>): void {
     Alert.alert("Falha na conexão!", "Houve falha tentando conectar ao servidores, verifique a sua internet.", [
         {
             isPreferred: true,

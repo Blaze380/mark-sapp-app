@@ -4,7 +4,7 @@ import { SQLiteDatabase } from 'expo-sqlite/build/SQLite';
 
 //DEPRECATED por causa de sofrimento e muito AVC
 export async function createUserDatabase (): Promise<void> {
-    const db: SQLiteDatabase = openDatabase(Databases.USER,);
+    const db: SQLiteDatabase = openDatabase(Databases.USER);
     db.transactionAsync(async (tx: SQLTransactionAsync): Promise<void> => {
         const userResult: ResultSet = await tx.executeSqlAsync(`CREATE TABLE IF NOT EXISTS ${ DBNames.USER } (
             id TEXT PRIMARY KEY,

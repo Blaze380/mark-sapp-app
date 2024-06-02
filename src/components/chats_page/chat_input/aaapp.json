@@ -1,0 +1,366 @@
+{
+    "_icon": {
+        "_reactInternalInstance": {},
+        "_reactInternals": {
+            "_debugHookTypes": null,
+            "_debugNeedsRemount": false,
+            "_debugOwner": [
+                "FiberNode"
+            ],
+            "_debugSource": null,
+            "actualDuration": 5.756075859069824,
+            "actualStartTime": 456724959.077837,
+            "alternate": null,
+            "child": [
+                "FiberNode"
+            ],
+            "childLanes": 0,
+            "deletions": null,
+            "dependencies": null,
+            "elementType": [
+                "Function Icon"
+            ],
+            "flags": 513,
+            "index": 0,
+            "key": null,
+            "lanes": 0,
+            "memoizedProps": [
+                "Object"
+            ],
+            "memoizedState": null,
+            "mode": 2,
+            "pendingProps": [
+                "Object"
+            ],
+            "ref": [
+                "Function ref"
+            ],
+            "return": [
+                "FiberNode"
+            ],
+            "selfBaseDuration": 2.118384003639221,
+            "sibling": null,
+            "stateNode": [
+                "Circular"
+            ],
+            "subtreeFlags": 9439233,
+            "tag": 1,
+            "treeBaseDuration": 3.0290759205818176,
+            "type": [
+                "Function Icon"
+            ],
+            "updateQueue": [
+                "Object"
+            ]
+        },
+        "context": {},
+        "props": {
+            "allowFontScaling": false,
+            "name": "microphone",
+            "size": 30
+        },
+        "refs": {},
+        "root": null,
+        "state": null,
+        "updater": {
+            "enqueueForceUpdate": [
+                "Function enqueueForceUpdate"
+            ],
+            "enqueueReplaceState": [
+                "Function enqueueReplaceState"
+            ],
+            "enqueueSetState": [
+                "Function enqueueSetState"
+            ],
+            "isMounted": [
+                "Function isMounted"
+            ]
+        }
+    },
+    "_mounted": true,
+    "_reactInternalInstance": {},
+    "_reactInternals": {
+        "_debugHookTypes": null,
+        "_debugNeedsRemount": false,
+        "_debugOwner": {
+            "_debugHookTypes": [
+                "Array"
+            ],
+            "_debugNeedsRemount": false,
+            "_debugOwner": [
+                "FiberNode"
+            ],
+            "_debugSource": null,
+            "actualDuration": 74.66207665205002,
+            "actualStartTime": 456724894.697529,
+            "alternate": [
+                "FiberNode"
+            ],
+            "child": [
+                "FiberNode"
+            ],
+            "childLanes": 0,
+            "deletions": null,
+            "dependencies": null,
+            "elementType": [
+                "Function ChatPageMessageInput"
+            ],
+            "flags": 1,
+            "index": 2,
+            "key": null,
+            "lanes": 1,
+            "memoizedProps": [
+                "Object"
+            ],
+            "memoizedState": [
+                "Object"
+            ],
+            "mode": 2,
+            "pendingProps": [
+                "Object"
+            ],
+            "ref": null,
+            "return": [
+                "FiberNode"
+            ],
+            "selfBaseDuration": 1.2523080110549927,
+            "sibling": null,
+            "stateNode": null,
+            "subtreeFlags": 9456133,
+            "tag": 0,
+            "treeBaseDuration": 43.36538803577423,
+            "type": [
+                "Function ChatPageMessageInput"
+            ],
+            "updateQueue": null
+        },
+        "_debugSource": {
+            "columnNumber": 21,
+            "fileName": "C:\\Users\\BLAZEH\\Desktop\\ProjectS\\Deving\\N O D E\\mark-sapp\\mark-sapp-app\\src\\components\\chats_page\\chat_input\\ChatPageSendButton.tsx",
+            "lineNumber": 32
+        },
+        "actualDuration": 6.304844856262207,
+        "actualStartTime": 456724958.530529,
+        "alternate": null,
+        "child": {
+            "_debugHookTypes": null,
+            "_debugNeedsRemount": false,
+            "_debugOwner": [
+                "Circular"
+            ],
+            "_debugSource": null,
+            "actualDuration": 5.756075859069824,
+            "actualStartTime": 456724959.077837,
+            "alternate": null,
+            "child": [
+                "FiberNode"
+            ],
+            "childLanes": 0,
+            "deletions": null,
+            "dependencies": null,
+            "elementType": [
+                "Function Icon"
+            ],
+            "flags": 513,
+            "index": 0,
+            "key": null,
+            "lanes": 0,
+            "memoizedProps": [
+                "Object"
+            ],
+            "memoizedState": null,
+            "mode": 2,
+            "pendingProps": [
+                "Object"
+            ],
+            "ref": [
+                "Function ref"
+            ],
+            "return": [
+                "Circular"
+            ],
+            "selfBaseDuration": 2.118384003639221,
+            "sibling": null,
+            "stateNode": [
+                "Icon"
+            ],
+            "subtreeFlags": 9439233,
+            "tag": 1,
+            "treeBaseDuration": 3.0290759205818176,
+            "type": [
+                "Function Icon"
+            ],
+            "updateQueue": [
+                "Object"
+            ]
+        },
+        "childLanes": 0,
+        "deletions": null,
+        "dependencies": null,
+        "elementType": [
+            "Function Icon"
+        ],
+        "flags": 1049093,
+        "index": 0,
+        "key": null,
+        "lanes": 0,
+        "memoizedProps": {
+            "allowFontScaling": false,
+            "name": "microphone",
+            "size": 30
+        },
+        "memoizedState": {
+            "fontIsLoaded": true
+        },
+        "mode": 2,
+        "pendingProps": {
+            "allowFontScaling": false,
+            "name": "microphone",
+            "size": 30
+        },
+        "ref": {
+            "current": [
+                "Circular"
+            ]
+        },
+        "return": {
+            "_debugHookTypes": null,
+            "_debugNeedsRemount": false,
+            "_debugOwner": [
+                "FiberNode"
+            ],
+            "_debugSource": [
+                "Object"
+            ],
+            "actualDuration": 8.562075853347778,
+            "actualStartTime": 456724958.214222,
+            "alternate": null,
+            "child": [
+                "Circular"
+            ],
+            "childLanes": 0,
+            "deletions": null,
+            "dependencies": null,
+            "elementType": "RCTView",
+            "flags": 512,
+            "index": 0,
+            "key": null,
+            "lanes": 0,
+            "memoizedProps": [
+                "Object"
+            ],
+            "memoizedState": null,
+            "mode": 2,
+            "pendingProps": [
+                "Object"
+            ],
+            "ref": [
+                "Function anonymous"
+            ],
+            "return": [
+                "FiberNode"
+            ],
+            "selfBaseDuration": 0.30469298362731934,
+            "sibling": null,
+            "stateNode": [
+                "ReactNativeFiberHostComponent"
+            ],
+            "subtreeFlags": 9439749,
+            "tag": 5,
+            "treeBaseDuration": 3.973306953907013,
+            "type": "RCTView",
+            "updateQueue": null
+        },
+        "selfBaseDuration": 0.535692036151886,
+        "sibling": {
+            "_debugHookTypes": null,
+            "_debugNeedsRemount": false,
+            "_debugOwner": [
+                "FiberNode"
+            ],
+            "_debugSource": [
+                "Object"
+            ],
+            "actualDuration": 0.11169201135635376,
+            "actualStartTime": 456724964.956145,
+            "alternate": null,
+            "child": null,
+            "childLanes": 0,
+            "deletions": null,
+            "dependencies": null,
+            "elementType": [
+                "Function PressabilityDebugView"
+            ],
+            "flags": 1048577,
+            "index": 1,
+            "key": null,
+            "lanes": 0,
+            "memoizedProps": [
+                "Object"
+            ],
+            "memoizedState": null,
+            "mode": 2,
+            "pendingProps": [
+                "Object"
+            ],
+            "ref": null,
+            "return": [
+                "FiberNode"
+            ],
+            "selfBaseDuration": 0.10384601354598999,
+            "sibling": null,
+            "stateNode": null,
+            "subtreeFlags": 0,
+            "tag": 0,
+            "treeBaseDuration": 0.10384601354598999,
+            "type": [
+                "Function PressabilityDebugView"
+            ],
+            "updateQueue": null
+        },
+        "stateNode": [
+            "Circular"
+        ],
+        "subtreeFlags": 9439745,
+        "tag": 1,
+        "treeBaseDuration": 3.5647679567337036,
+        "type": [
+            "Function Icon"
+        ],
+        "updateQueue": {
+            "baseState": [
+                "Object"
+            ],
+            "effects": null,
+            "firstBaseUpdate": null,
+            "lastBaseUpdate": null,
+            "shared": [
+                "Object"
+            ]
+        }
+    },
+    "context": {},
+    "props": {
+        "allowFontScaling": false,
+        "name": "microphone",
+        "size": 30
+    },
+    "refs": {},
+    "state": {
+        "fontIsLoaded": true
+    },
+    "updater": {
+        "enqueueForceUpdate": [
+            "Function enqueueForceUpdate"
+        ],
+        "enqueueReplaceState": [
+            "Function enqueueReplaceState"
+        ],
+        "enqueueSetState": [
+            "Function enqueueSetState"
+        ],
+        "isMounted": [
+            "Function isMounted"
+        ]
+    }
+}
